@@ -7,7 +7,7 @@ import { PupilFormComponent } from "./pupil-form/pupil-form.component";
 
 const routes: Routes = [
   { path: 'school-list', component: SchoolListComponent},
-  { path: 'school-form', component: SchoolFormComponent},
+  { path: 'school/:id', component: SchoolFormComponent},
   { path: 'pupil-list', component: PupilListComponent},
   { path: 'pupil-form', component: PupilFormComponent},
 ];

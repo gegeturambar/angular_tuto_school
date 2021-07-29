@@ -3,13 +3,14 @@ import { ObjectUnsubscribedError } from "rxjs";
 export class School {
     
     public static fromJson(json: any): School {
-        return new School(json.id, json.name, json.rooms,json.teachers);
+        return new School(json.name, json.rooms,json.teachers,json.id);
     }
 
-    constructor(public id: number,
+    constructor(
         public name: string,
         public rooms: [],
-        public teachers: []
+        public teachers: [],
+        public id?: number
     ){
     }
 }

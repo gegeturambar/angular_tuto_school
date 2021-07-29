@@ -1,10 +1,11 @@
 <div *ngIf="schools">
-    <table>
-        <thead></thead>
-        <tbody>
-            <tr *ngFor="let school of schools">
-                <td>{{school.name}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <ul class="schools">
+        <li *ngFor="let school of schools">
+            <a routerLink="/school/{{school.id}}">
+                <span class="badge">{{school.id}}</span> {{ school.name}}
+            </a>
+        </li>
+    </ul>
 </div>
+
+<app-school-form></app-school-form>

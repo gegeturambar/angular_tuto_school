@@ -18,9 +18,9 @@ export class SchoolListComponent implements OnInit {
   }
 
   getSchools(): void {
-    this.schoolService.getSchools().subscribe(schools => {
+    this.schoolService.getSchools().subscribe(schools => 
       this.schools = schools
-    });
+    );
   }
 
 }

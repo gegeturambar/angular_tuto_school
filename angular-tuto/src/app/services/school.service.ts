@@ -12,7 +12,7 @@ export class SchoolService {
   constructor(private http: HttpClient) {
    }
 
-  private schoolUrl = 'http://localhost:8000/api/schools.json';
+  private schoolUrl = 'http://localhost:8000/api/schools';
 
   private headers = {
     'Content-Type': 'application/json',
@@ -33,4 +33,35 @@ export class SchoolService {
         )
     );
   } 
+
+  getSchool(id: Number): Observable<School> {
+    return this.http.get<any>(this.schoolUrl+`/${id}`, this.requestOptions)
+    .pipe(
+        map(
+          jsonSchool => School.fromJson(jsonSchool)
+        )
+    );
+  }
+
+  createSchool(school: School): Observable<School> {
+    console.log(school);
+    return this.http.post<any>(this.schoolUrl,school, this.requestOptions)
+    .pipe(
+        map(
+          jsonSchool => School.fromJson(jsonSchool)
+        )
+    );
+  }
+
+  updateSchool(school: School): Observable<School> {
+    return this.http.put<any>(this.schoolUrl+`/${school.id}`,school, this.requestOptions)
+    .pipe(
+        map(
+          jsonSchool => {
+            return School.fromJson(jsonSchool);
+          }
+        )
+    );
+  }
+
 }

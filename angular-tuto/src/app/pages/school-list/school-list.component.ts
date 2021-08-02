@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SchoolService } from "../services/school.service";
-import { School } from "../repository/dto/school";
+import { SchoolService } from "../../services/school.service";
+import { School } from "../../repository/dto/school";
 
 @Component({
   selector: 'app-school-list',

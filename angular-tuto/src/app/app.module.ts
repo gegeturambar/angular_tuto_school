@@ -5,14 +5,15 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TeacherListComponent } from './teacher-list/teacher-list.component';
-import { PupilListComponent } from './pupil-list/pupil-list.component';
-import { SchoolListComponent } from './school-list/school-list.component';
-import { SchoolFormComponent } from './school-form/school-form.component';
-import { PupilFormComponent } from './pupil-form/pupil-form.component';
-import { TeacherFormComponent } from './teacher-form/teacher-form.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { TeacherListComponent } from './pages/teacher-list/teacher-list.component';
+import { PupilListComponent } from './pages/pupil-list/pupil-list.component';
+import { SchoolListComponent } from './pages/school-list/school-list.component';
+import { SchoolFormComponent } from './pages/school-form/school-form.component';
+import { PupilFormComponent } from './pages/pupil-form/pupil-form.component';
+import { TeacherFormComponent } from './pages/teacher-form/teacher-form.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SelectComponent } from './components/school/select/select.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     PupilFormComponent,
     TeacherFormComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,

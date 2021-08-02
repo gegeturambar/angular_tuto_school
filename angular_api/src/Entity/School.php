@@ -7,6 +7,7 @@ use App\Repository\SchoolRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SchoolRepository::class)
@@ -18,11 +19,13 @@ class School
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"getPupil"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"getPupil"})
      */
     private $name;
 
@@ -36,10 +39,16 @@ class School
      */
     private $teachers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Pupil::class, mappedBy="school")
+     */
+    private $pupils;
+
     public function __construct()
     {
         $this->rooms = new ArrayCollection();
         $this->teachers = new ArrayCollection();
+        $this->pupils = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +122,36 @@ class School
             // set the owning side to null (unless already changed)
             if ($teacher->getSchool() === $this) {
                 $teacher->setSchool(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pupil[]
+     */
+    public function getPupils(): Collection
+    {
+        return $this->pupils;
+    }
+
+    public function addPupil(Pupil $pupil): self
+    {
+        if (!$this->pupils->contains($pupil)) {
+            $this->pupils[] = $pupil;
+            $pupil->setSchool($this);
+        }
+
+        return $this;
+    }
+
+    public function removePupil(Pupil $pupil): self
+    {
+        if ($this->pupils->removeElement($pupil)) {
+            // set the owning side to null (unless already changed)
+            if ($pupil->getSchool() === $this) {
+                $pupil->setSchool(null);
             }
         }
 

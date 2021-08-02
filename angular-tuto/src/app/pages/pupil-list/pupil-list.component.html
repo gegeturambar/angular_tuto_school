@@ -1,0 +1,11 @@
+<div *ngIf="pupils">
+    <ul class="pupils">
+        <li *ngFor="let pupil of pupils">
+            <a routerLink="/pupil/{{pupil.id}}">
+                <span class="badge">{{pupil.id}}</span> {{ pupil.firstname}}
+            </a>
+        </li>
+    </ul>
+</div>
+
+<app-pupil-form></app-pupil-form>

@@ -1,0 +1,35 @@
+<div class="form-group">
+
+    <form (ngSubmit)="onSubmit()" #pupilForm="ngForm">
+      <h2>{{pupil.firstname | uppercase}} Details</h2>
+      <div *ngIf="pupil.id"><span>id: </span>{{pupil.id}}</div>
+      <div>
+        <label for="pupil-firstname">pupil firstname: </label>
+        <input type="test" class="form-control" name="firstname" id="pupil-firstname" [(ngModel)]="pupil.firstname" placeholder="firstname" #firstname="ngModel">
+        <div [hidden]="firstname.valid || firstname.pristine" class="alert alert-danger">
+            Firstname is required
+          </div>
+      </div>
+      <div>
+        <label for="pupil-lastname">pupil lastname: </label>
+        <input type="test" class="form-control" name="lastname" id="pupil-lastname" [(ngModel)]="pupil.lastname" placeholder="lastname" #lastname="ngModel">
+        <div [hidden]="lastname.valid || lastname.pristine" class="alert alert-danger">
+            Lastname is required
+          </div>
+      </div>
+      <div>
+        <label for="pupil-email">pupil email: </label>
+        <input type="test" class="form-control" name="email" id="pupil-email" [(ngModel)]="pupil.email" placeholder="email" #email="ngModel">
+        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+            Email is required
+          </div>
+      </div>
+      <div>
+        <label for="pupil-school">pupil email: </label>
+        <app-select-school name="school" id="pupil-school"></app-select-school>
+      </div>
+      <button (click)="save()">{{getLibelleAction()}}</button>
+      <button (click)="goBack()">goBack</button>
+    </form>
+  </div>
+    

@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { School } from '../repository/dto/school';
-import { SchoolService } from "../services/school.service";
+import { School } from '../../repository/dto/school';
+import { SchoolService } from "../../services/school.service";
 
 @Component({
   selector: 'app-school-form',

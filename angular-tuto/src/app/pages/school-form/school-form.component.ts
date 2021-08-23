@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { School } from '../../repository/dto/school';
 import { SchoolService } from "../../services/school.service";
@@ -11,14 +11,18 @@ import { SchoolService } from "../../services/school.service";
 })
 export class SchoolFormComponent implements OnInit {
 
+  @Output() createdSchoolEvent = new EventEmitter<any>();
+
   submitted = false;
 
   onSubmit() {
     console.log(this.school.id)
     if(this.school.id )
       this.schoolService.updateSchool(this.school).subscribe(school => this.school = school);
-    else
+    else{
       this.schoolService.createSchool(this.school).subscribe(school => this.school = school);
+      this.createdSchoolEvent.emit(this.school);
+    }
     this.submitted = true;
   }
 

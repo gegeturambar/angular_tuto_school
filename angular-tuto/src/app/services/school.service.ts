@@ -32,7 +32,6 @@ export class SchoolService extends ApiService{
   }
 
   createSchool(school: School): Observable<School> {
-    console.log(school);
     return this.http.post<any>(SchoolService.schoolUrl,school, this.requestOptions)
     .pipe(
         map(
@@ -47,6 +46,17 @@ export class SchoolService extends ApiService{
         map(
           jsonSchool => {
             return School.fromJson(jsonSchool);
+          }
+        )
+    );
+  }
+
+  deleteSchool(school: School): Observable<School> {
+    return this.http.delete<any>(SchoolService.schoolUrl+`/${school.id}`, this.requestOptions)
+    .pipe(
+        map(
+          jsonSchool => {
+            return jsonSchool;
           }
         )
     );

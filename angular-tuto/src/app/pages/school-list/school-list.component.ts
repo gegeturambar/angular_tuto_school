@@ -18,9 +18,19 @@ export class SchoolListComponent implements OnInit {
   }
 
   getSchools(): void {
-    this.schoolService.getSchools().subscribe(schools => 
+    this.schoolService.getSchools().subscribe(schools =>
       this.schools = schools
     );
+  }
+
+  createdSchool(event : Event) {
+    this.getSchools();
+  }
+
+  deleteSchool(school : School) {
+    this.schoolService.deleteSchool(school).subscribe(ret => {
+      this.getSchools();
+    });
   }
 
 }

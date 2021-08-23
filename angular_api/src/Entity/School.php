@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+
 use App\Repository\SchoolRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,37 +13,39 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SchoolRepository::class)
+ * @ApiResource(normalizationContext={"groups"={"getSchool"}})
  */
-#[ApiResource]
 class School
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"getPupil"})
+     * @Groups({"getPupil","getSchool"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"getPupil"})
+     * @Groups({"getPupil","getSchool"})
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Room::class, mappedBy="school", orphanRemoval=true)
      */
-    private $rooms;
+    public $rooms;
 
     /**
      * @ORM\OneToMany(targetEntity=Teacher::class, mappedBy="school")
+     * @Groups({"getSchool"})
      */
     private $teachers;
 
     /**
      * @ORM\OneToMany(targetEntity=Pupil::class, mappedBy="school")
      */
+    #[ApiSubresource]
     private $pupils;
 
     public function __construct()

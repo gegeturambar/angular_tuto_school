@@ -26,10 +26,9 @@
       </div>
       <div>
         <label for="pupil-school">pupil email: </label>
-        <app-select-school name="school" id="pupil-school"></app-select-school>
+        <app-select-school *ngIf="pupil.school" name="school" id="pupil-school" (selectEvent)="selectSchool($event)" [defaultSchool]="pupil.school"></app-select-school>
       </div>
-      <button (click)="save()">{{getLibelleAction()}}</button>
+      <button type="submit">{{getLibelleAction()}}</button>
       <button (click)="goBack()">goBack</button>
     </form>
   </div>
-    

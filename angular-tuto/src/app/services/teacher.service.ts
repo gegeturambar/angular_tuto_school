@@ -3,39 +3,27 @@ import { Teacher } from "../repository/dto/teacher";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { map, tap } from "rxjs/operators";
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TeacherService {
+export class TeacherService extends ApiService {
 
-  constructor(private http: HttpClient) {
-   }
-
-  private teacherUrl = 'http://localhost:8000/api/teachers';
-
-  private headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Headers': 'Content-Type'
-  };
-
-  private requestOptions = {
-    headers: new HttpHeaders(this.headers),
-  };
+  private static teacherUrl =  TeacherService.apiUrl+'/teachers';
 
   getTeachers(): Observable<Teacher[]> {
-    return this.http.get<any[]>(this.teacherUrl, this.requestOptions)
+    return this.http.get<any[]>(TeacherService.teacherUrl, this.requestOptions)
     .pipe(
       map(
-          jsonTeachers => 
+          jsonTeachers =>
             jsonTeachers.map( jsonTeacher => Teacher.fromJson(jsonTeacher))
         )
     );
-  } 
+  }
 
   getTeacher(id: Number): Observable<Teacher> {
-    return this.http.get<any>(this.teacherUrl+`/${id}`, this.requestOptions)
+    return this.http.get<any>(TeacherService.teacherUrl+`/${id}`, this.requestOptions)
     .pipe(
         map(
           jsonTeacher => Teacher.fromJson(jsonTeacher)
@@ -46,7 +34,7 @@ export class TeacherService {
   createTeacher(teacher: Teacher): Observable<Teacher> {
     delete teacher.id;
 
-    return this.http.post<any>(this.teacherUrl,teacher, this.requestOptions)
+    return this.http.post<any>(TeacherService.teacherUrl,teacher, this.requestOptions)
     .pipe(
         map(
           jsonTeacher => Teacher.fromJson(jsonTeacher)
@@ -55,7 +43,7 @@ export class TeacherService {
   }
 
   updateTeacher(teacher: Teacher): Observable<Teacher> {
-    return this.http.put<any>(this.teacherUrl+`/${teacher.id}`,teacher, this.requestOptions)
+    return this.http.put<any>(TeacherService.teacherUrl+`/${teacher.id}`,Teacher.toJson(teacher), this.requestOptions)
     .pipe(
         map(
           jsonTeacher => {

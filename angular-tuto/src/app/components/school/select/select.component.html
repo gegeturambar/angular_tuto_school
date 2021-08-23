@@ -1,5 +1,5 @@
-<select>
-    <option *ngFor="let school of schools">
+<select (change)="change($event)">
+    <option *ngFor="let school of schools" value="{{school.id}}" [selected]="school.id == defaultSchool?.id">
         <span>{{school.name}}</span>
     </option>
 </select>

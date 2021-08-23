@@ -14,7 +14,6 @@ export class PupilFormComponent implements OnInit {
   submitted = false;
 
   onSubmit() {
-    console.log(this.pupil.id)
     if(this.pupil.id )
       this.pupilService.updatePupil(this.pupil).subscribe(pupil => this.pupil = pupil);
     else
@@ -45,7 +44,8 @@ export class PupilFormComponent implements OnInit {
     return id ? 'Modify' : 'Create';
   }
 
-  public save() {
-    this.pupilService
+  public selectSchool(event : any) {
+    this.pupil.school = event;
   }
+
 }
